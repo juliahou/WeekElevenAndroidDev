@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">WeekElevenAndroidDev</string>
+    <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">416322769052132</string>
+    <string name="fb_login_protocol_scheme">fb416322769052132</string>
+</resources>
