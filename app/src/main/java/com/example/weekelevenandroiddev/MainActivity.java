@@ -29,9 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     CallbackManager callbackManager;
 
-    private static final String PHOTOS = "photos";
-    private static final String FRIENDS = "friends";
-    private static final String MESSAGES = "messages";
+    private static final String PHOTOS = "user_photos";
+    private static final String FRIENDS = "user_friends";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList(PHOTOS,FRIENDS,MESSAGES));
+        loginButton.setReadPermissions(Arrays.asList(PHOTOS,FRIENDS));
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();

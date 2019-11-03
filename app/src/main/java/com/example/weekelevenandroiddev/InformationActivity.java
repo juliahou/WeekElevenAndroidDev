@@ -9,6 +9,9 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class InformationActivity extends AppCompatActivity {
 
     @Override
@@ -18,12 +21,19 @@ public class InformationActivity extends AppCompatActivity {
 
         GraphRequest request = GraphRequest.newGraphPathRequest(
                 AccessToken.getCurrentAccessToken(),
-                "/me/photos",
+                "/me/friends",
                 new GraphRequest.Callback() {
                     @Override
                     public void onCompleted(GraphResponse response) {
-                        TextView textView = findViewById(R.id.stuff);
-                        textView.setText(response.getRawResponse());
+                        try {
+                            JSONObject info = response.getJSONObject();
+                            JSONObject summary = (JSONObject)info.get("summary");
+                            int numFriends = (int)summary.get("total_count");
+                            TextView textView = findViewById(R.id.stuff);
+                            textView.setText("You have " + numFriends + " friends.");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
