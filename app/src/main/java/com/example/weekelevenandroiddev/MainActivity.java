@@ -9,6 +9,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,9 +23,15 @@ import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
     CallbackManager callbackManager;
+
+    private static final String PHOTOS = "photos";
+    private static final String FRIENDS = "friends";
+    private static final String MESSAGES = "messages";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Arrays.asList(PHOTOS,FRIENDS,MESSAGES));
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
